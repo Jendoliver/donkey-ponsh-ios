@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28E544F320A1E9AC0049636A /* EnvironmentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E544F220A1E9AC0049636A /* EnvironmentObject.swift */; };
 		4A7107C5209CBC3500B35B9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7107C4209CBC3500B35B9F /* AppDelegate.swift */; };
 		4A7107C7209CBC3500B35B9F /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4A7107C6209CBC3500B35B9F /* GameScene.sks */; };
 		4A7107C9209CBC3500B35B9F /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4A7107C8209CBC3500B35B9F /* Actions.sks */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		28E544F220A1E9AC0049636A /* EnvironmentObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentObject.swift; sourceTree = "<group>"; };
 		4A7107C1209CBC3500B35B9F /* DonkeyPonsh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DonkeyPonsh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A7107C4209CBC3500B35B9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A7107C6209CBC3500B35B9F /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				4A7107DF209CC46400B35B9F /* GUI.swift */,
 				4A7107E1209CC48B00B35B9F /* Hazard.swift */,
 				4A7107E3209CD16700B35B9F /* CollisionChannel.swift */,
+				28E544F220A1E9AC0049636A /* EnvironmentObject.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 				4A7107C5209CBC3500B35B9F /* AppDelegate.swift in Sources */,
 				4A7107E4209CD16700B35B9F /* CollisionChannel.swift in Sources */,
 				4A7107E0209CC46400B35B9F /* GUI.swift in Sources */,
+				28E544F320A1E9AC0049636A /* EnvironmentObject.swift in Sources */,
 				4A7107E2209CC48B00B35B9F /* Hazard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,5 +11,26 @@ import SpriteKit
 
 class Hazard: SKSpriteNode
 {
-
+    var startingSprite = SKTexture(image: #imageLiteral(resourceName: "idle"))
+    
+    private var deathSound =  SKAudioNode(fileNamed : "death")
+    
+    init(pos: CGPoint)
+    {
+        super.init(texture: startingSprite, color: UIColor.clear, size: startingSprite.size())
+        position = pos;
+        self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: startingSprite.size().width, height: startingSprite.size().height))
+        self.zPosition = 0
+        physicsBody?.affectedByGravity = false
+    }
+    
+    required init?(coder aDecoder: NSCoder)
+    {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func processTouch(touch: UITouch, event: UIEvent?)
+    {
+    }
+    
 }
