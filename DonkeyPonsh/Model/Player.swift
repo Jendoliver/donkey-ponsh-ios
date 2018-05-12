@@ -41,7 +41,7 @@ class Player: SKSpriteNode
         moveSprites = [SKTexture(image: #imageLiteral(resourceName: "walk1")), SKTexture(image: #imageLiteral(resourceName: "walk2")), SKTexture(image: #imageLiteral(resourceName: "walk3"))]
         jumpSprite = SKTexture(image: #imageLiteral(resourceName: "jump"))
         deathSprite = SKTexture(image: #imageLiteral(resourceName: "death"))
-        moveAnimation = SKAction.animate(with: moveSprites!, timePerFrame: 0.2)
+        moveAnimation = SKAction.animate(with: moveSprites!, timePerFrame: 1.0)
     }
     
     required init?(coder aDecoder: NSCoder)
@@ -70,11 +70,13 @@ class Player: SKSpriteNode
         {
             print("Player#blendAnimations: MOVE LEFT")
             self.run(moveAnimation!)
+            xScale = xScale < 0 ? xScale * -1 : xScale
         }
         else if((physicsBody?.velocity.dx)! > CGFloat(0))
         {
             print("Player#blendAnimations: MOVE RIGHT")
-            self.run(moveAnimation!.reversed())
+            self.run(moveAnimation!)
+            xScale = xScale > 0 ? xScale * -1 : xScale
         }
     }
     
