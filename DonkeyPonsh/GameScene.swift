@@ -17,6 +17,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     private var player: Player?
     private var gui = GUI()
     private var environmentFactory: EnvironmentFactory?
+    private var hazardFactory: HazardFactory?
     
     override func didMove(to view: SKView)
     {
@@ -27,17 +28,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         
         player = Player(pos: CGPoint(x: self.frame.midX, y: self.frame.midY))
         environmentFactory = EnvironmentFactory(scene: self)
+        hazardFactory = HazardFactory(scene: self)
         
         let floorSprite = SKTexture(image: #imageLiteral(resourceName: "floor1"))
         let floor = EnvironmentObject(pos: CGPoint(x: self.frame.midX, y: self.frame.minY + floorSprite.size().height / 2), rotationRadiant: CGFloat(0), startingSprite : floorSprite)
         
-        let enviroment1 = environmentFactory!.generateEnvironment()
-        let enviroment2 = environmentFactory!.generateEnvironment()
-        let enviroment3 = environmentFactory!.generateEnvironment()
+        self.addChild(environmentFactory!.generateEnvironment())
+        self.addChild(environmentFactory!.generateEnvironment())
+        self.addChild(environmentFactory!.generateEnvironment())
         
-        self.addChild(enviroment1)
-        self.addChild(enviroment2)
-        self.addChild(enviroment3)
+        self.addChild(hazardFactory!.generateHazard())
+        self.addChild(hazardFactory!.generateHazard())
+        self.addChild(hazardFactory!.generateHazard())
         
         self.addChild(player!)
         self.addChild(floor)

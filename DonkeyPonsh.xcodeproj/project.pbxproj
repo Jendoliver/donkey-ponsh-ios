@@ -23,6 +23,7 @@
 		4AF7071020A71CD600D45452 /* CategoryChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF7070F20A71CD600D45452 /* CategoryChannel.swift */; };
 		4AF7071220A727FB00D45452 /* SyntacticSugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF7071120A727FA00D45452 /* SyntacticSugar.swift */; };
 		4AF7071420A72E8A00D45452 /* EnvironmentFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF7071320A72E8A00D45452 /* EnvironmentFactory.swift */; };
+		4AF7071620A74E2C00D45452 /* HazardFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF7071520A74E2C00D45452 /* HazardFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		4AF7070F20A71CD600D45452 /* CategoryChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryChannel.swift; sourceTree = "<group>"; };
 		4AF7071120A727FA00D45452 /* SyntacticSugar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyntacticSugar.swift; sourceTree = "<group>"; };
 		4AF7071320A72E8A00D45452 /* EnvironmentFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentFactory.swift; sourceTree = "<group>"; };
+		4AF7071520A74E2C00D45452 /* HazardFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HazardFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				28E544F220A1E9AC0049636A /* EnvironmentObject.swift */,
 				4AF7070F20A71CD600D45452 /* CategoryChannel.swift */,
 				4AF7071320A72E8A00D45452 /* EnvironmentFactory.swift */,
+				4AF7071520A74E2C00D45452 /* HazardFactory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 				4A7107CB209CBC3500B35B9F /* GameScene.swift in Sources */,
 				4AF7071020A71CD600D45452 /* CategoryChannel.swift in Sources */,
 				4A7107CD209CBC3500B35B9F /* GameViewController.swift in Sources */,
+				4AF7071620A74E2C00D45452 /* HazardFactory.swift in Sources */,
 				4A7107C5209CBC3500B35B9F /* AppDelegate.swift in Sources */,
 				4AF7071420A72E8A00D45452 /* EnvironmentFactory.swift in Sources */,
 				4AF7071220A727FB00D45452 /* SyntacticSugar.swift in Sources */,
