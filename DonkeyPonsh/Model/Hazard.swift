@@ -20,8 +20,9 @@ class Hazard: SKSpriteNode
         super.init(texture: startingSprite, color: UIColor.clear, size: startingSprite.size())
         position = pos;
         self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: startingSprite.size().width, height: startingSprite.size().height))
+        self.physicsBody?.categoryBitMask = CollisionChannel.hazard.rawValue
+        self.physicsBody?.friction = 0
         self.zPosition = 0
-        physicsBody?.affectedByGravity = false
     }
     
     required init?(coder aDecoder: NSCoder)

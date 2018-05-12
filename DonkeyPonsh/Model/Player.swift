@@ -26,8 +26,8 @@ class Player: SKSpriteNode
     private var jumpSound = SKAudioNode(fileNamed: "jump")
     private var deathSound =  SKAudioNode(fileNamed : "death")
     
-    private var isInAir = false
-    private var isDead = false
+    var isInAir = false
+    var isDead = false
     
     init(pos: CGPoint)
     {
@@ -36,12 +36,15 @@ class Player: SKSpriteNode
         self.scale(to: CGSize(width: 100, height: 100))
         position = pos;
         self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.size.width, height: self.size.height))
+        self.physicsBody?.categoryBitMask = CollisionChannel.player.rawValue
+        self.physicsBody?.collisionBitMask = CollisionChannel.floor.rawValue
         self.physicsBody?.friction = 0
         self.zPosition = 0
         moveSprites = [SKTexture(image: #imageLiteral(resourceName: "walk1")), SKTexture(image: #imageLiteral(resourceName: "walk2")), SKTexture(image: #imageLiteral(resourceName: "walk3"))]
         jumpSprite = SKTexture(image: #imageLiteral(resourceName: "jump"))
         deathSprite = SKTexture(image: #imageLiteral(resourceName: "death"))
-        moveAnimation = SKAction.animate(with: moveSprites!, timePerFrame: 1.0)
+        moveAnimation = SKAction.animate(with: moveSprites!, timePerFrame: 0.1)
+        moveAnimation = SKAction.repeatForever(moveAnimation!)
     }
     
     required init?(coder aDecoder: NSCoder)
@@ -66,13 +69,13 @@ class Player: SKSpriteNode
             print("Player#blendAnimations: AIR")
             self.texture = jumpSprite
         }
-        else if ((physicsBody?.velocity.dx)! < CGFloat(0))
+        else if ((physicsBody?.velocity.dx)! < -horizontalSpeed + 1)
         {
             print("Player#blendAnimations: MOVE LEFT")
             self.run(moveAnimation!)
             xScale = xScale < 0 ? xScale * -1 : xScale
         }
-        else if((physicsBody?.velocity.dx)! > CGFloat(0))
+        else if((physicsBody?.velocity.dx)! > horizontalSpeed - 1)
         {
             print("Player#blendAnimations: MOVE RIGHT")
             self.run(moveAnimation!)
@@ -94,6 +97,7 @@ class Player: SKSpriteNode
             case GUI.GUIAction.up:
                 print("Player#processGuiAction: Action up")
                 physicsBody?.applyForce(CGVector(dx: 0, dy: jumpForce))
+                isInAir = true
                 break
                 
             case GUI.GUIAction.right:

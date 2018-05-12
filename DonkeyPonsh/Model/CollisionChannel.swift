@@ -10,5 +10,7 @@ import UIKit
 
 enum CollisionChannel: UInt32
 {
-    case physicObjects = 1
+    case floor = 1
+    case hazard = 2
+    case player = 4
 }

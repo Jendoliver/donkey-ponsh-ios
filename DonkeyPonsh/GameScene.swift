@@ -9,7 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene
+class GameScene: SKScene, SKPhysicsContactDelegate
 {
     private var label: SKLabelNode?
     private var spinnyNode: SKShapeNode?
@@ -35,6 +35,47 @@ class GameScene: SKScene
     override func update(_ currentTime: TimeInterval)
     {
         player!.blendAnimations()
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact)
+    {
+        let bodyA = contact.bodyA
+        let bodyB = contact.bodyB
+        var playerBody: SKPhysicsBody? = nil
+        var otherBody: SKPhysicsBody? = nil
+        
+        print("CONTACT")
+        
+        // Check if the player has collided with something, else return
+        if(bodyA.categoryBitMask == CollisionChannel.player.rawValue)
+        {
+            print("CONTACT PLAYER")
+            playerBody = bodyA
+            otherBody = bodyB
+        }
+        else if(bodyB.categoryBitMask == CollisionChannel.player.rawValue)
+        {
+            print("CONTACT PLAYER")
+            playerBody = bodyB
+            otherBody = bodyA
+        }
+        if(playerBody == nil)
+        {
+            print("CONTACT ENV")
+            return
+        }
+        
+        // Check the body the player has collided with
+        if(otherBody!.categoryBitMask == CollisionChannel.floor.rawValue)
+        {
+            print("CONTACT PLAYER WITH FLOOR")
+            player!.isInAir = false
+        }
+        if(otherBody!.categoryBitMask == CollisionChannel.hazard.rawValue)
+        {
+            print("CONTACT PLAYER WITH HAZARD")
+            player!.isDead = true
+        }
     }
     
     func touchDown(atPoint pos : CGPoint) {
