@@ -23,11 +23,12 @@ class Player: SKSpriteNode
     
     private let idleSprite = SKTexture(image: #imageLiteral(resourceName: "idle"))
     
-    private let moveSprites = [SKTexture(imageNamed: "1"), SKTexture(imageNamed: "2")]
-    private let deathSprites = [SKTexture(imageNamed: "1"), SKTexture(imageNamed: "2")]
+    private var moveSprites: [SKTexture]?
+    private var jumpSprite: SKTexture?
+    private var deathSprite: SKTexture?
     
-    private var moveAnimation = SKAction.animate(with: [SKTexture(imageNamed: "1"), SKTexture(imageNamed: "2")], timePerFrame: 0.2)
-    private var deathAnimation = SKAction.animate(with: [SKTexture(imageNamed: "1"), SKTexture(imageNamed: "2")], timePerFrame: 0.2)
+    private var moveAnimation: SKAction?
+    private var deathAnimation: SKAction?
     
     private var jumpSound = SKAudioNode(fileNamed: "jump")
     private var deathSound =  SKAudioNode(fileNamed : "death")
@@ -36,23 +37,21 @@ class Player: SKSpriteNode
     
     init(pos: CGPoint)
     {
-        let startingSprite = moveSprites[0]
+        let startingSprite = idleSprite
         super.init(texture: startingSprite, color: UIColor.clear, size: startingSprite.size())
+        self.scale(to: CGSize(width: 100, height: 100))
         position = pos;
-        self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: startingSprite.size().width, height: startingSprite.size().height))
+        self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.size.width, height: self.size.height))
         self.zPosition = 0
-        
-        
-        
+        moveSprites = [SKTexture(image: #imageLiteral(resourceName: "walk1")), SKTexture(image: #imageLiteral(resourceName: "walk2")), SKTexture(image: #imageLiteral(resourceName: "walk3"))]
+        jumpSprite = SKTexture(image: #imageLiteral(resourceName: "jump"))
+        deathSprite = SKTexture(image: #imageLiteral(resourceName: "death"))
+        moveAnimation = SKAction.animate(with: moveSprites!, timePerFrame: 0.2)
     }
     
     required init?(coder aDecoder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    public func processTouch(touch: UITouch, event: UIEvent?)
-    {
     }
     
     public func respawnAt(position: CGPoint)

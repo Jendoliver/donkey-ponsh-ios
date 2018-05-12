@@ -72,14 +72,14 @@
 			children = (
 				4A7107DC209CBC4C00B35B9F /* Model */,
 				4A7107C4209CBC3500B35B9F /* AppDelegate.swift */,
-				4A7107C6209CBC3500B35B9F /* GameScene.sks */,
-				4A7107C8209CBC3500B35B9F /* Actions.sks */,
 				4A7107CA209CBC3500B35B9F /* GameScene.swift */,
 				4A7107CC209CBC3500B35B9F /* GameViewController.swift */,
 				4A7107CE209CBC3500B35B9F /* Main.storyboard */,
 				4A7107D1209CBC3500B35B9F /* Assets.xcassets */,
 				4A7107D3209CBC3500B35B9F /* LaunchScreen.storyboard */,
 				4A7107D6209CBC3500B35B9F /* Info.plist */,
+				4A7107C6209CBC3500B35B9F /* GameScene.sks */,
+				4A7107C8209CBC3500B35B9F /* Actions.sks */,
 			);
 			path = DonkeyPonsh;
 			sourceTree = "<group>";

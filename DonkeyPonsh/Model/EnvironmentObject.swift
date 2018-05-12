@@ -20,13 +20,11 @@ class EnvironmentObject: SKSpriteNode {
         
         position = pos;
         self.zRotation = rotationRadiant
-        
         self.zPosition = 0
+        self.scale(to: CGSize(width: 3 * size.width, height: 3 * size.height))
         
-        self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: startingSprite.size().width, height: startingSprite.size().height))
+        self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.size.width, height: self.size.height))
         physicsBody?.isDynamic = false
-        
-        //self.scale(to: CGSize(width: 100, height: 100))
     }
     
     required init?(coder aDecoder: NSCoder)

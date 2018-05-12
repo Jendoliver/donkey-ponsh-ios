@@ -9,22 +9,27 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class GameScene: SKScene
+{
+    private var label: SKLabelNode?
+    private var spinnyNode: SKShapeNode?
     
-    private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
+    private var player: Player?
+    private var gui = GUI()
     
     override func didMove(to view: SKView) {
         
         //TODO Remove it's only for testing
-        self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+        //self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+        
+        player = Player(pos: CGPoint(x: self.frame.midX, y: self.frame.midY))
         
         let enviroment = EnvironmentObject(pos: CGPoint(x: self.frame.midX, y: self.frame.minY), rotationRadiant: CGFloat(0), startingSprite : SKTexture(image: #imageLiteral(resourceName: "floor1")))
-        enviroment.scale(to: CGSize(width: self.frame.width, height: self.frame.height*0.1))
         
-        //let player = Player(pos: CGPoint(x: self.frame.midX, y: self.frame.midY))
+        self.addChild(player!)
         self.addChild(enviroment)
-       
+        self.addChild(gui)
+        gui.show()
     }
     
     
