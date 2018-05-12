@@ -62,13 +62,6 @@ class GUI: SKNode
     
     public func processInput(point: CGPoint) -> GUIAction
     {
-        print("X: " + String(describing: point.x) + ", Y: " + String(describing: point.y))
-        print("frame.minX: " + String(describing: scene!.frame.minX))
-        print("frame.minY: " + String(describing: scene!.frame.minY))
-        print("frame.maxX: " + String(describing: scene!.frame.maxX))
-        print("frame.maxY: " + String(describing: scene!.frame.maxY))
-        print("frame.midX: " + String(describing: scene!.frame.midX))
-        print("frame.midY: " + String(describing: scene!.frame.midY))
         if(point.y < scene!.frame.minY + buttonSize!)
         {
             if(point.x < scene!.frame.minX + buttonSize!)

@@ -21,6 +21,7 @@
 		4A7107E2209CC48B00B35B9F /* Hazard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7107E1209CC48B00B35B9F /* Hazard.swift */; };
 		4A7107E4209CD16700B35B9F /* CollisionChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7107E3209CD16700B35B9F /* CollisionChannel.swift */; };
 		4AF7071020A71CD600D45452 /* CategoryChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF7070F20A71CD600D45452 /* CategoryChannel.swift */; };
+		4AF7071220A727FB00D45452 /* SyntacticSugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF7071120A727FA00D45452 /* SyntacticSugar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		4A7107E1209CC48B00B35B9F /* Hazard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hazard.swift; sourceTree = "<group>"; };
 		4A7107E3209CD16700B35B9F /* CollisionChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionChannel.swift; sourceTree = "<group>"; };
 		4AF7070F20A71CD600D45452 /* CategoryChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryChannel.swift; sourceTree = "<group>"; };
+		4AF7071120A727FA00D45452 /* SyntacticSugar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyntacticSugar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 				4A7107C4209CBC3500B35B9F /* AppDelegate.swift */,
 				4A7107CA209CBC3500B35B9F /* GameScene.swift */,
 				4A7107CC209CBC3500B35B9F /* GameViewController.swift */,
+				4AF7071120A727FA00D45452 /* SyntacticSugar.swift */,
 				4A7107CE209CBC3500B35B9F /* Main.storyboard */,
 				4A7107D1209CBC3500B35B9F /* Assets.xcassets */,
 				4A7107D3209CBC3500B35B9F /* LaunchScreen.storyboard */,
@@ -178,6 +181,7 @@
 				4AF7071020A71CD600D45452 /* CategoryChannel.swift in Sources */,
 				4A7107CD209CBC3500B35B9F /* GameViewController.swift in Sources */,
 				4A7107C5209CBC3500B35B9F /* AppDelegate.swift in Sources */,
+				4AF7071220A727FB00D45452 /* SyntacticSugar.swift in Sources */,
 				4A7107E4209CD16700B35B9F /* CollisionChannel.swift in Sources */,
 				4A7107E0209CC46400B35B9F /* GUI.swift in Sources */,
 				28E544F320A1E9AC0049636A /* EnvironmentObject.swift in Sources */,

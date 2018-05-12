@@ -8,7 +8,9 @@
 
 import UIKit
 
-class CategoryChannel: NSObject
+enum CategoryChannel: UInt32
 {
-
+    case floor = 1
+    case hazard = 2
+    case player = 4
 }

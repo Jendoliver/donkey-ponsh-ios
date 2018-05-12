@@ -24,8 +24,9 @@ class EnvironmentObject: SKSpriteNode {
         self.scale(to: CGSize(width: 3 * size.width, height: 3 * size.height))
         
         self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.size.width, height: self.size.height))
-        self.physicsBody?.categoryBitMask = CollisionChannel.floor.rawValue
-        self.physicsBody?.collisionBitMask = CollisionChannel.floor.rawValue
+        self.physicsBody?.categoryBitMask = CategoryChannel.floor.rawValue
+        self.physicsBody?.collisionBitMask = CollisionChannel.environment.rawValue
+        self.physicsBody?.contactTestBitMask = CollisionChannel.environment.rawValue
         physicsBody?.isDynamic = false
     }
     

@@ -20,8 +20,11 @@ class Hazard: SKSpriteNode
         super.init(texture: startingSprite, color: UIColor.clear, size: startingSprite.size())
         position = pos;
         self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: startingSprite.size().width, height: startingSprite.size().height))
-        self.physicsBody?.categoryBitMask = CollisionChannel.hazard.rawValue
+        self.physicsBody?.categoryBitMask = CategoryChannel.hazard.rawValue
+        self.physicsBody?.collisionBitMask = CollisionChannel.environment.rawValue
+        self.physicsBody?.contactTestBitMask = CollisionChannel.environment.rawValue
         self.physicsBody?.friction = 0
+        self.physicsBody?.restitution = CGFloat(SyntacticSugar.random(0..<1))
         self.zPosition = 0
     }
     

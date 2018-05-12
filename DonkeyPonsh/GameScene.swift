@@ -17,9 +17,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     private var player: Player?
     private var gui = GUI()
     
-    override func didMove(to view: SKView) {
+    override func didMove(to view: SKView)
+    {
+        self.physicsWorld.contactDelegate = self
         
-        //TODO Remove it's only for testing
         //self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         
         player = Player(pos: CGPoint(x: self.frame.midX, y: self.frame.midY))
@@ -37,44 +38,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         player!.blendAnimations()
     }
     
+    func didEnd(_ contact: SKPhysicsContact)
+    {
+        // End contact player with floor
+        if(contact.bodyA.categoryBitMask == CategoryChannel.player.rawValue && contact.bodyB.categoryBitMask == CategoryChannel.floor.rawValue
+            || contact.bodyB.categoryBitMask == CategoryChannel.player.rawValue && contact.bodyA.categoryBitMask == CategoryChannel.floor.rawValue)
+        {
+            player?.isInAir = true
+        }
+    }
+    
     func didBegin(_ contact: SKPhysicsContact)
     {
-        let bodyA = contact.bodyA
-        let bodyB = contact.bodyB
-        var playerBody: SKPhysicsBody? = nil
-        var otherBody: SKPhysicsBody? = nil
-        
-        print("CONTACT")
-        
-        // Check if the player has collided with something, else return
-        if(bodyA.categoryBitMask == CollisionChannel.player.rawValue)
+        // Begin contact player with floor
+        if(contact.bodyA.categoryBitMask == CategoryChannel.player.rawValue && contact.bodyB.categoryBitMask == CategoryChannel.floor.rawValue
+            || contact.bodyB.categoryBitMask == CategoryChannel.player.rawValue && contact.bodyA.categoryBitMask == CategoryChannel.floor.rawValue)
         {
-            print("CONTACT PLAYER")
-            playerBody = bodyA
-            otherBody = bodyB
-        }
-        else if(bodyB.categoryBitMask == CollisionChannel.player.rawValue)
-        {
-            print("CONTACT PLAYER")
-            playerBody = bodyB
-            otherBody = bodyA
-        }
-        if(playerBody == nil)
-        {
-            print("CONTACT ENV")
-            return
-        }
-        
-        // Check the body the player has collided with
-        if(otherBody!.categoryBitMask == CollisionChannel.floor.rawValue)
-        {
-            print("CONTACT PLAYER WITH FLOOR")
             player!.isInAir = false
+            player!.hasStartedWalking = !player!.isIdle
         }
-        if(otherBody!.categoryBitMask == CollisionChannel.hazard.rawValue)
+        
+        // Begin contact player with hazard
+        if(contact.bodyA.categoryBitMask == CategoryChannel.player.rawValue && contact.bodyB.categoryBitMask == CategoryChannel.hazard.rawValue
+            || contact.bodyB.categoryBitMask == CategoryChannel.player.rawValue && contact.bodyA.categoryBitMask == CategoryChannel.hazard.rawValue)
         {
-            print("CONTACT PLAYER WITH HAZARD")
-            player!.isDead = true
+            player?.isDead = true
         }
     }
     
