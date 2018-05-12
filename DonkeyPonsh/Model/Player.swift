@@ -11,15 +11,8 @@ import SpriteKit
 
 class Player: SKSpriteNode
 {
-    public enum State
-    {
-        case walkingLeft
-        case walkingRight
-        case jumpingLeft
-        case jumpingRight
-        case idle
-        case dead
-    }
+    private var jumpForce = CGFloat(20000)
+    private var horizontalSpeed = CGFloat(250)
     
     private let idleSprite = SKTexture(image: #imageLiteral(resourceName: "idle"))
     
@@ -33,7 +26,8 @@ class Player: SKSpriteNode
     private var jumpSound = SKAudioNode(fileNamed: "jump")
     private var deathSound =  SKAudioNode(fileNamed : "death")
     
-    private var state = State.idle
+    private var isInAir = false
+    private var isDead = false
     
     init(pos: CGPoint)
     {
@@ -42,6 +36,7 @@ class Player: SKSpriteNode
         self.scale(to: CGSize(width: 100, height: 100))
         position = pos;
         self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.size.width, height: self.size.height))
+        self.physicsBody?.friction = 0
         self.zPosition = 0
         moveSprites = [SKTexture(image: #imageLiteral(resourceName: "walk1")), SKTexture(image: #imageLiteral(resourceName: "walk2")), SKTexture(image: #imageLiteral(resourceName: "walk3"))]
         jumpSprite = SKTexture(image: #imageLiteral(resourceName: "jump"))
@@ -57,28 +52,55 @@ class Player: SKSpriteNode
     public func respawnAt(position: CGPoint)
     {
         self.position = position
-        state = State.idle
     }
     
-    public func updateState()
+    public func blendAnimations()
     {
-        if(state == State.dead)
+        if(isDead)
         {
+            print("Player#blendAnimations: DEAD")
             return  // We let the programmer decide when the dead state has finished by calling respawnAt
         }
-        if (physicsBody?.velocity.dx == 0 && physicsBody?.velocity.dy == 0)
+        else if(isInAir)
         {
-            state = State.idle
+            print("Player#blendAnimations: AIR")
+            self.texture = jumpSprite
         }
         else if ((physicsBody?.velocity.dx)! < CGFloat(0))
         {
-            state = State.walkingLeft
+            print("Player#blendAnimations: MOVE LEFT")
+            self.run(moveAnimation!)
         }
         else if((physicsBody?.velocity.dx)! > CGFloat(0))
         {
-            state = State.walkingRight
+            print("Player#blendAnimations: MOVE RIGHT")
+            self.run(moveAnimation!.reversed())
         }
-        
-        // TODO check jumps
+    }
+    
+    public func processGuiAction(action: GUI.GUIAction)
+    {
+        if(!isInAir)
+        {
+            switch action
+            {
+            case GUI.GUIAction.left:
+                print("Player#processGuiAction: Action left")
+                physicsBody?.velocity.dx = -horizontalSpeed
+                break
+                
+            case GUI.GUIAction.up:
+                print("Player#processGuiAction: Action up")
+                physicsBody?.applyForce(CGVector(dx: 0, dy: jumpForce))
+                break
+                
+            case GUI.GUIAction.right:
+                print("Player#processGuiAction: Action right")
+                physicsBody?.velocity.dx = horizontalSpeed
+            default:
+                print("Player#processGuiAction: default")
+                break
+            }
+        }
     }
 }
