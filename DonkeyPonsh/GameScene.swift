@@ -16,19 +16,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     
     private var player: Player?
     private var gui = GUI()
+    private var environmentFactory: EnvironmentFactory?
     
     override func didMove(to view: SKView)
     {
         self.physicsWorld.contactDelegate = self
         
+        // this its for testing
         //self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         
         player = Player(pos: CGPoint(x: self.frame.midX, y: self.frame.midY))
+        environmentFactory = EnvironmentFactory(scene: self)
         
-        let enviroment = EnvironmentObject(pos: CGPoint(x: self.frame.midX, y: self.frame.minY), rotationRadiant: CGFloat(0), startingSprite : SKTexture(image: #imageLiteral(resourceName: "floor1")))
+        let floorSprite = SKTexture(image: #imageLiteral(resourceName: "floor1"))
+        let floor = EnvironmentObject(pos: CGPoint(x: self.frame.midX, y: self.frame.minY + floorSprite.size().height / 2), rotationRadiant: CGFloat(0), startingSprite : floorSprite)
+        
+        let enviroment1 = environmentFactory!.generateEnvironment()
+        let enviroment2 = environmentFactory!.generateEnvironment()
+        let enviroment3 = environmentFactory!.generateEnvironment()
+        
+        self.addChild(enviroment1)
+        self.addChild(enviroment2)
+        self.addChild(enviroment3)
         
         self.addChild(player!)
-        self.addChild(enviroment)
+        self.addChild(floor)
         self.addChild(gui)
         gui.show()
     }
@@ -45,6 +57,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
             || contact.bodyB.categoryBitMask == CategoryChannel.player.rawValue && contact.bodyA.categoryBitMask == CategoryChannel.floor.rawValue)
         {
             player?.isInAir = true
+            player!.physicsBody?.affectedByGravity = true
         }
     }
     
@@ -55,6 +68,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
             || contact.bodyB.categoryBitMask == CategoryChannel.player.rawValue && contact.bodyA.categoryBitMask == CategoryChannel.floor.rawValue)
         {
             player!.isInAir = false
+            player!.physicsBody?.affectedByGravity = false
             player!.hasStartedWalking = !player!.isIdle
         }
         

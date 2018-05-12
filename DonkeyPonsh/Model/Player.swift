@@ -11,7 +11,7 @@ import SpriteKit
 
 class Player: SKSpriteNode
 {
-    private var jumpForce = CGFloat(20000)
+    private var jumpForce = CGFloat(25000)
     private var horizontalSpeed = CGFloat(250)
     
     private let idleSprite = SKTexture(image: #imageLiteral(resourceName: "idle"))
@@ -44,7 +44,9 @@ class Player: SKSpriteNode
         self.physicsBody?.collisionBitMask = CollisionChannel.environment.rawValue
         self.physicsBody?.contactTestBitMask = CollisionChannel.environment.rawValue
         self.physicsBody?.restitution = 0.0
-        self.physicsBody?.friction = 0
+        self.physicsBody?.angularVelocity = 0
+        self.physicsBody?.allowsRotation = false
+        self.physicsBody?.friction = 1.0
         self.zPosition = 0
         
         moveSprites = [SKTexture(image: #imageLiteral(resourceName: "walk1")), SKTexture(image: #imageLiteral(resourceName: "walk2")), SKTexture(image: #imageLiteral(resourceName: "walk3"))]
