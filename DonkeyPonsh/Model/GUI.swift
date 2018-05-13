@@ -27,6 +27,7 @@ class GUI: SKNode
     private let leftArrow = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "arrow")))
     private let rightArrow = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "arrow")))
     private let upArrow = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "arrow")))
+    private var score = SKLabelNode()
     
     override init()
     {
@@ -34,7 +35,9 @@ class GUI: SKNode
         rightArrow.zRotation = CGFloat.pi
         upArrow.zRotation = -CGFloat.pi / 2
         self.zPosition = 1
+        setupScoreLabel()
         
+        self.addChild(score)
         self.addChild(leftArrow)
         self.addChild(upArrow)
         self.addChild(rightArrow)
@@ -79,5 +82,16 @@ class GUI: SKNode
         }
         print("GUI#processInput: Action out")
         return GUIAction.out
+    }
+    
+
+    func setupScoreLabel()
+    {
+        score.fontName = "Arial"
+        score.fontSize = 80
+        score.text = "Score : 0"
+        score.position = CGPoint(x: self.frame.midX, y: self.frame.maxY)
+        score.zPosition = 2
+        score.alpha = 0.5
     }
 }

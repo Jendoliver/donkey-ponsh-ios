@@ -27,6 +27,8 @@ class Player: SKSpriteNode
     private var jumpSound = SKAudioNode(fileNamed: "jump")
     private var deathSound =  SKAudioNode(fileNamed : "death")
     
+    var score = 0
+    
     var isInAir = true
     var hasStartedWalking = false
     var isIdle = true
@@ -59,6 +61,13 @@ class Player: SKSpriteNode
         deathAnimation = SKAction.animate(with: deathSprites!, timePerFrame: 0.1)
         deathAnimation = SKAction.repeatForever(deathAnimation!)
     }
+    
+    func updateScore()
+    {
+        //Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: <#T##(Timer) -> Void#>)
+        //timer = Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(self.ponerTubosYHuecos), userInfo: nil, repeats: true)
+    }
+    
     
     required init?(coder aDecoder: NSCoder)
     {

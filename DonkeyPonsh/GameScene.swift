@@ -18,6 +18,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     private var gui = GUI()
     private var environmentFactory: EnvironmentFactory?
     private var hazardFactory: HazardFactory?
+    private var gameOver = false
+    private var timer = Timer()
     
     override func didMove(to view: SKView)
     {
@@ -44,12 +46,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         self.addChild(player!)
         self.addChild(floor)
         self.addChild(gui)
-        gui.show()
+        gui.show()        
     }
     
     override func update(_ currentTime: TimeInterval)
     {
         player!.blendAnimations()
+        //camera?.position.y += 1000
     }
     
     func didEnd(_ contact: SKPhysicsContact)
