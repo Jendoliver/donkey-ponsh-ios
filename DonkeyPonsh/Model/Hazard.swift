@@ -25,8 +25,8 @@ class Hazard: SKSpriteNode
         self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.height / 2)
         self.physicsBody?.categoryBitMask = CategoryChannel.hazard.rawValue
         self.physicsBody?.collisionBitMask = CollisionChannel.environment.rawValue
-        self.physicsBody?.contactTestBitMask = CollisionChannel.environment.rawValue
-        self.physicsBody?.friction = 0.3
+        self.physicsBody?.contactTestBitMask = CategoryChannel.player.rawValue
+        self.physicsBody?.friction = 0.6
         self.physicsBody?.restitution = CGFloat(SyntacticSugar.random(0..<1))
         self.zPosition = 0
     }

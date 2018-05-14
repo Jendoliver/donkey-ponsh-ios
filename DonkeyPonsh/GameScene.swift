@@ -25,6 +25,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     private var sceneEnvironmentTimer = Timer()
     private var hazardTimer = Timer()
     
+    private var hazards = [Hazard]()
+    private var environmentObjects = [EnvironmentObject]()
+    
     private var hasGameEnded = false
     
     override func didMove(to view: SKView)
@@ -37,13 +40,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     @objc func startGame()
     {
         // In case we're coming from an ended game
-        hasGameEnded = false
-        self.removeAllChildren()
+        reset()
         
         // Class initialization
         player = Player(pos: CGPoint(x: self.frame.midX, y: self.frame.midY))
         environmentFactory = EnvironmentFactory(scene: self)
         hazardFactory = HazardFactory(scene: self)
+        
+        
         
         // Music init
         let bgMusic = SKAudioNode(fileNamed: songs[SyntacticSugar.random(0..<songs.count)])
@@ -70,11 +74,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         let floorSprite = SKTexture(image: #imageLiteral(resourceName: "floor1"))
         let floor = EnvironmentObject(pos: CGPoint(x: self.frame.midX, y: self.frame.minY + floorSprite.size().height / 2), rotationRadiant: CGFloat(0), startingSprite : floorSprite)
         
-        self.addChild(environmentFactory!.generateEnvironment())
-        self.addChild(environmentFactory!.generateEnvironment())
-        self.addChild(environmentFactory!.generateEnvironment())
-        self.addChild(environmentFactory!.generateEnvironment())
+        // Start enviroment objects
+        var generatedEnviromentObject = environmentFactory!.generateEnvironment()
+        self.addChild(generatedEnviromentObject)
+        environmentObjects.append(generatedEnviromentObject)
         
+        generatedEnviromentObject = environmentFactory!.generateEnvironment()
+        self.addChild(generatedEnviromentObject)
+        environmentObjects.append(generatedEnviromentObject)
+
+        generatedEnviromentObject = environmentFactory!.generateEnvironment()
+        self.addChild(generatedEnviromentObject)
+        environmentObjects.append(generatedEnviromentObject)
+        
+        generatedEnviromentObject = environmentFactory!.generateEnvironment()
+        self.addChild(generatedEnviromentObject)
+        environmentObjects.append(generatedEnviromentObject)
+        
+        // Adding initial components to scene
         self.addChild(player!)
         self.addChild(camera)
         self.addChild(floor)
@@ -85,7 +102,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     override func update(_ currentTime: TimeInterval)
     {
         player!.blendAnimations()
-        camera!.position.y += hasGameEnded ? 0 : 1
+        camera!.position.y += hasGameEnded ? 0 : 1.5
 
         if (isPlayerBelowCamera())
         {
@@ -101,14 +118,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     
     @objc func updateScene()
     {
-        self.addChild(environmentFactory!.generateEnvironment())
-        // TODO remove out of sight environment?
+        let generatedEnviromentObject = environmentFactory!.generateEnvironment()
+        self.addChild(generatedEnviromentObject)
+        environmentObjects.append(generatedEnviromentObject)
+        
+        // Remove enviromentObject
+        if(environmentObjects.count > 20){
+            environmentObjects.first?.removeFromParent()
+            environmentObjects.remove(at: 0)
+        }
+        
     }
     
     @objc func updateHazards()
     {
-        self.addChild(hazardFactory!.generateHazard())
-        // TODO remove out of sight hazards?
+       let generatedHazard = hazardFactory!.generateHazard()
+       self.addChild(generatedHazard)
+        
+        // Remove hazards
+        if(hazards.count > 20){
+            hazards.first?.removeFromParent()
+            hazards.remove(at: 0)
+        }
+    }
+    
+    func reset()
+    {
+        hasGameEnded = false
+        self.removeAllChildren()
+        hazards.removeAll()
+        environmentObjects.removeAll()
     }
     
     func isPlayerBelowCamera() -> Bool
@@ -154,7 +193,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate
             || contact.bodyB.categoryBitMask == CategoryChannel.player.rawValue && contact.bodyA.categoryBitMask == CategoryChannel.floor.rawValue)
         {
             print("CONTACT PLAYER - FLOOR")
-            //gameOver()
             player!.isInAir = false
             player!.physicsBody?.affectedByGravity = false
             player!.hasStartedWalking = !player!.isIdle

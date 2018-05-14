@@ -15,7 +15,7 @@ class EnvironmentFactory: NSObject
     
     private static let PLATFORMS_ANGLE = CGFloat.pi / 8
     private static let MAX_HEIGHT = 400
-    private static let MIN_HEIGHT = 300
+    private static let MIN_HEIGHT = 325
     
     private var lastHeight: CGFloat?
     private var isNextLeft = true

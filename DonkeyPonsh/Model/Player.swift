@@ -13,7 +13,7 @@ class Player: SKSpriteNode
 {
     // Player movement constants
     private var jumpForce = CGFloat(25000)
-    private var horizontalSpeed = CGFloat(250)
+    private var horizontalSpeed = CGFloat(300)
     
     private let deathLaunchForce = CGFloat(30000)
     

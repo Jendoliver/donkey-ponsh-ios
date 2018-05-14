@@ -116,11 +116,11 @@
 			children = (
 				4A7107DD209CBD3800B35B9F /* Player.swift */,
 				4A7107DF209CC46400B35B9F /* GUI.swift */,
-				4A7107E1209CC48B00B35B9F /* Hazard.swift */,
 				4A7107E3209CD16700B35B9F /* CollisionChannel.swift */,
-				28E544F220A1E9AC0049636A /* EnvironmentObject.swift */,
 				4AF7070F20A71CD600D45452 /* CategoryChannel.swift */,
+				28E544F220A1E9AC0049636A /* EnvironmentObject.swift */,
 				4AF7071320A72E8A00D45452 /* EnvironmentFactory.swift */,
+				4A7107E1209CC48B00B35B9F /* Hazard.swift */,
 				4AF7071520A74E2C00D45452 /* HazardFactory.swift */,
 			);
 			path = Model;
