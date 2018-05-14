@@ -11,17 +11,18 @@ import SpriteKit
 
 class HazardFactory: NSObject
 {
-    private let upperMargin = CGFloat(200)
+    private let upperDistanceToPlayer: CGFloat
     
-    private var scene: SKScene?
+    private var scene: GameScene?
     
-    init(scene: SKScene)
+    init(scene: GameScene)
     {
         self.scene = scene
+        upperDistanceToPlayer = scene.frame.size.height
     }
     
     public func generateHazard() -> Hazard
     {
-        return Hazard(pos: CGPoint(x: SyntacticSugar.random(scene!.frame.minX..<scene!.frame.maxY), y: scene!.frame.maxY + upperMargin))
+        return Hazard(pos: CGPoint(x: SyntacticSugar.random(scene!.frame.minX..<scene!.frame.maxY), y: scene!.player!.position.y + upperDistanceToPlayer))
     }
 }

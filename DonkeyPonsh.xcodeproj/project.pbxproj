@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		28E544F320A1E9AC0049636A /* EnvironmentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E544F220A1E9AC0049636A /* EnvironmentObject.swift */; };
+		4A2A740B20A8F8320042D201 /* die.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4A2A740920A8F8320042D201 /* die.wav */; };
+		4A2A740C20A8F8320042D201 /* jump.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4A2A740A20A8F8320042D201 /* jump.mp3 */; };
+		4A2A741120A90E820042D201 /* quasi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4A2A740D20A90E810042D201 /* quasi.mp3 */; };
+		4A2A741220A90E820042D201 /* quejio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4A2A740E20A90E810042D201 /* quejio.mp3 */; };
+		4A2A741320A90E820042D201 /* purefrancesc.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4A2A740F20A90E820042D201 /* purefrancesc.mp3 */; };
+		4A2A741420A90E820042D201 /* retroliver.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4A2A741020A90E820042D201 /* retroliver.mp3 */; };
 		4A7107C5209CBC3500B35B9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7107C4209CBC3500B35B9F /* AppDelegate.swift */; };
 		4A7107C7209CBC3500B35B9F /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4A7107C6209CBC3500B35B9F /* GameScene.sks */; };
 		4A7107C9209CBC3500B35B9F /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4A7107C8209CBC3500B35B9F /* Actions.sks */; };
@@ -28,6 +34,12 @@
 
 /* Begin PBXFileReference section */
 		28E544F220A1E9AC0049636A /* EnvironmentObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentObject.swift; sourceTree = "<group>"; };
+		4A2A740920A8F8320042D201 /* die.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = die.wav; sourceTree = "<group>"; };
+		4A2A740A20A8F8320042D201 /* jump.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = jump.mp3; sourceTree = "<group>"; };
+		4A2A740D20A90E810042D201 /* quasi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = quasi.mp3; sourceTree = "<group>"; };
+		4A2A740E20A90E810042D201 /* quejio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = quejio.mp3; sourceTree = "<group>"; };
+		4A2A740F20A90E820042D201 /* purefrancesc.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = purefrancesc.mp3; sourceTree = "<group>"; };
+		4A2A741020A90E820042D201 /* retroliver.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = retroliver.mp3; sourceTree = "<group>"; };
 		4A7107C1209CBC3500B35B9F /* DonkeyPonsh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DonkeyPonsh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A7107C4209CBC3500B35B9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A7107C6209CBC3500B35B9F /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -89,6 +101,12 @@
 				4A7107D6209CBC3500B35B9F /* Info.plist */,
 				4A7107C6209CBC3500B35B9F /* GameScene.sks */,
 				4A7107C8209CBC3500B35B9F /* Actions.sks */,
+				4A2A740A20A8F8320042D201 /* jump.mp3 */,
+				4A2A740920A8F8320042D201 /* die.wav */,
+				4A2A740F20A90E820042D201 /* purefrancesc.mp3 */,
+				4A2A740D20A90E810042D201 /* quasi.mp3 */,
+				4A2A740E20A90E810042D201 /* quejio.mp3 */,
+				4A2A741020A90E820042D201 /* retroliver.mp3 */,
 			);
 			path = DonkeyPonsh;
 			sourceTree = "<group>";
@@ -167,9 +185,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A2A741420A90E820042D201 /* retroliver.mp3 in Resources */,
+				4A2A741220A90E820042D201 /* quejio.mp3 in Resources */,
+				4A2A741320A90E820042D201 /* purefrancesc.mp3 in Resources */,
 				4A7107D0209CBC3500B35B9F /* Main.storyboard in Resources */,
 				4A7107C7209CBC3500B35B9F /* GameScene.sks in Resources */,
+				4A2A741120A90E820042D201 /* quasi.mp3 in Resources */,
 				4A7107D2209CBC3500B35B9F /* Assets.xcassets in Resources */,
+				4A2A740B20A8F8320042D201 /* die.wav in Resources */,
+				4A2A740C20A8F8320042D201 /* jump.mp3 in Resources */,
 				4A7107D5209CBC3500B35B9F /* LaunchScreen.storyboard in Resources */,
 				4A7107C9209CBC3500B35B9F /* Actions.sks in Resources */,
 			);

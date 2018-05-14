@@ -11,24 +11,31 @@ import SpriteKit
 
 class Player: SKSpriteNode
 {
+    // Player movement constants
     private var jumpForce = CGFloat(25000)
     private var horizontalSpeed = CGFloat(250)
     
-    private let idleSprite = SKTexture(image: #imageLiteral(resourceName: "idle"))
+    private let deathLaunchForce = CGFloat(30000)
     
+    // Player sprites
+    private let idleSprite = SKTexture(image: #imageLiteral(resourceName: "idle"))
     private var moveSprites: [SKTexture]?
     private var jumpSprites: [SKTexture]?
     private var deathSprites: [SKTexture]?
     
+    // Player animations
     private var moveAnimation: SKAction?
     private var jumpAnimation: SKAction?
     private var deathAnimation: SKAction?
     
-    private var jumpSound = SKAudioNode(fileNamed: "jump")
-    private var deathSound =  SKAudioNode(fileNamed : "death")
+    // Player sounds
+    private var jumpSound = SKAction.playSoundFileNamed("jump.mp3", waitForCompletion: false)
+    private var deathSound =  SKAction.playSoundFileNamed("die.wav", waitForCompletion: false)
     
+    // Pretty self explanatory
     var score = 0
     
+    // Player states
     var isInAir = true
     var hasStartedWalking = false
     var isIdle = true
@@ -39,6 +46,7 @@ class Player: SKSpriteNode
         let startingSprite = idleSprite
         super.init(texture: startingSprite, color: UIColor.clear, size: startingSprite.size())
         
+        // Player physics init
         self.scale(to: CGSize(width: 100, height: 100))
         position = pos;
         self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.size.width, height: self.size.height))
@@ -51,6 +59,7 @@ class Player: SKSpriteNode
         self.physicsBody?.friction = 1.0
         self.zPosition = 0
         
+        // Player sprites/animations init
         moveSprites = [SKTexture(image: #imageLiteral(resourceName: "walk1")), SKTexture(image: #imageLiteral(resourceName: "walk2")), SKTexture(image: #imageLiteral(resourceName: "walk3"))]
         jumpSprites = [SKTexture(image: #imageLiteral(resourceName: "jump"))]
         deathSprites = [SKTexture(image: #imageLiteral(resourceName: "death"))]
@@ -62,34 +71,39 @@ class Player: SKSpriteNode
         deathAnimation = SKAction.repeatForever(deathAnimation!)
     }
     
-    func updateScore()
-    {
-        //Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: <#T##(Timer) -> Void#>)
-        //timer = Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(self.ponerTubosYHuecos), userInfo: nil, repeats: true)
-    }
-    
-    
     required init?(coder aDecoder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func respawnAt(position: CGPoint)
+    public func die()
     {
-        self.position = position
+        print("Player#die")
+        if (!isDead)
+        {
+            print("Player#die --> Trigger")
+            isDead = true
+            self.physicsBody!.velocity = CGVector(dx: 0, dy: 0)
+            self.run(deathSound)
+            self.run(deathAnimation!)
+            self.physicsBody!.affectedByGravity = false
+            let _ = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.applyDieLaunch), userInfo: nil, repeats: false)
+        }
+    }
+    
+    @objc func applyDieLaunch()
+    {
+        self.physicsBody!.affectedByGravity = true
+        self.physicsBody!.collisionBitMask = CollisionChannel.ghost.rawValue
+        self.physicsBody!.contactTestBitMask = CollisionChannel.ghost.rawValue
+        physicsBody?.applyForce(CGVector(dx: 0, dy: deathLaunchForce))
     }
     
     public func blendAnimations()
     {
-        if(isDead)
+        if(isDead || isIdle)
         {
-            print("Player#blendAnimations: DEAD")
-            return  // We let the programmer decide when the dead state has finished by calling respawnAt
-        }
-        
-        if(isIdle)
-        {
-            return
+            return 
         }
         
         // Texture orientation
@@ -116,6 +130,11 @@ class Player: SKSpriteNode
     
     public func processGuiAction(action: GUI.GUIAction)
     {
+        if(isDead)
+        {
+            return
+        }
+        
         switch action
         {
         case GUI.GUIAction.left:
@@ -128,6 +147,7 @@ class Player: SKSpriteNode
             if(!isInAir)
             {
                 print("Player#processGuiAction: Action up")
+                self.run(jumpSound)
                 physicsBody?.applyForce(CGVector(dx: 0, dy: jumpForce))
                 isInAir = true
             }

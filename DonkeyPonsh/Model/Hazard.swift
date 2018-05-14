@@ -35,9 +35,4 @@ class Hazard: SKSpriteNode
     {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    public func processTouch(touch: UITouch, event: UIEvent?)
-    {
-    }
-    
 }

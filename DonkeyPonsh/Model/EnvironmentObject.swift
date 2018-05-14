@@ -9,9 +9,10 @@
 import UIKit
 import SpriteKit
 
-class EnvironmentObject: SKSpriteNode {
-    
+class EnvironmentObject: SKSpriteNode
+{
     var startingSprite : SKTexture?
+    
     init(pos: CGPoint, rotationRadiant : CGFloat, startingSprite : SKTexture)
     {
         super.init(texture: startingSprite, color: UIColor.clear, size: startingSprite.size())

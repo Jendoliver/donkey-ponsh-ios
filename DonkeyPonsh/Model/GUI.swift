@@ -35,7 +35,6 @@ class GUI: SKNode
         rightArrow.zRotation = CGFloat.pi
         upArrow.zRotation = -CGFloat.pi / 2
         self.zPosition = 1
-        setupScoreLabel()
         
         self.addChild(score)
         self.addChild(leftArrow)
@@ -50,8 +49,9 @@ class GUI: SKNode
     
     public func show()
     {
+        setupScoreLabel()
         buttonSize = scene!.frame.width / 3
-        print("buttonSize: " + String(describing: buttonSize))
+        print(String(describing: buttonSize))
         let positionY = scene!.frame.minY + buttonSize! / 2
         buttonSize! += GUI.offset
         leftArrow.position = CGPoint(x: frame.maxX - buttonSize! / 2, y: positionY)
@@ -65,6 +65,7 @@ class GUI: SKNode
     
     public func processInput(point: CGPoint) -> GUIAction
     {
+        print(String(describing: point))
         if(point.y < scene!.frame.minY + buttonSize!)
         {
             if(point.x < scene!.frame.minX + buttonSize!)
@@ -83,15 +84,19 @@ class GUI: SKNode
         print("GUI#processInput: Action out")
         return GUIAction.out
     }
-    
 
-    func setupScoreLabel()
+    public func setupScoreLabel()
     {
         score.fontName = "Arial"
         score.fontSize = 80
         score.text = "Score : 0"
-        score.position = CGPoint(x: self.frame.midX, y: self.frame.maxY)
+        score.position = CGPoint(x: self.frame.midX, y: scene!.frame.maxY - score.fontSize)
         score.zPosition = 2
         score.alpha = 0.5
+    }
+    
+    public func updateScore(score: Int)
+    {
+        self.score.text = "Score : " + String(score)
     }
 }

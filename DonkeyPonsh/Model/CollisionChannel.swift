@@ -11,4 +11,5 @@ import UIKit
 enum CollisionChannel: UInt32
 {
     case environment = 1
+    case ghost = 2 // Used for player death
 }
