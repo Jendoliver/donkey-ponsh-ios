@@ -35,5 +35,4 @@ class EnvironmentObject: SKSpriteNode
     {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

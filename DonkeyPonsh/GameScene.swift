@@ -37,8 +37,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         self.physicsWorld.contactDelegate = self
         
         startGame()
-        
-        
     }
     
     @objc func startGame()

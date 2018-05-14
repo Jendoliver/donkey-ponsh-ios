@@ -48,8 +48,6 @@ class EnvironmentFactory: NSObject
         }
         lastHeight = nextHeight
         
-        print("NEXT HEIGHT: " + String(describing: nextHeight))
-        
         return EnvironmentObject(pos: nextPosition, rotationRadiant: nextRotation, startingSprite: environmentTextures[SyntacticSugar.random(0..<environmentTextures.count)])
     }
 }
