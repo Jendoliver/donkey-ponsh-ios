@@ -27,6 +27,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     
     private var hazards = [Hazard]()
     private var environmentObjects = [EnvironmentObject]()
+    private var dumpableNodes = [SKNode]()
+    private let MAX_DUMPABLE_NODES = 50
     
     private var hasGameEnded = false
     
@@ -40,14 +42,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     @objc func startGame()
     {
         // In case we're coming from an ended game
-        reset()
+        hasGameEnded = false
+        self.removeAllChildren()
+        dumpableNodes.removeAll()
+        //hazards.removeAll()
+        //environmentObjects.removeAll()
         
         // Class initialization
         player = Player(pos: CGPoint(x: self.frame.midX, y: self.frame.midY))
         environmentFactory = EnvironmentFactory(scene: self)
         hazardFactory = HazardFactory(scene: self)
-        
-        
         
         // Music init
         let bgMusic = SKAudioNode(fileNamed: songs[SyntacticSugar.random(0..<songs.count)])
@@ -75,21 +79,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         let floor = EnvironmentObject(pos: CGPoint(x: self.frame.midX, y: self.frame.minY + floorSprite.size().height / 2), rotationRadiant: CGFloat(0), startingSprite : floorSprite)
         
         // Start enviroment objects
-        var generatedEnviromentObject = environmentFactory!.generateEnvironment()
-        self.addChild(generatedEnviromentObject)
-        environmentObjects.append(generatedEnviromentObject)
-        
-        generatedEnviromentObject = environmentFactory!.generateEnvironment()
-        self.addChild(generatedEnviromentObject)
-        environmentObjects.append(generatedEnviromentObject)
-
-        generatedEnviromentObject = environmentFactory!.generateEnvironment()
-        self.addChild(generatedEnviromentObject)
-        environmentObjects.append(generatedEnviromentObject)
-        
-        generatedEnviromentObject = environmentFactory!.generateEnvironment()
-        self.addChild(generatedEnviromentObject)
-        environmentObjects.append(generatedEnviromentObject)
+        for _ in 0...4
+        {
+            let generatedEnviromentObject = environmentFactory!.generateEnvironment()
+            self.addChild(generatedEnviromentObject)
+            dumpableNodes.append(generatedEnviromentObject)
+        }
         
         // Adding initial components to scene
         self.addChild(player!)
@@ -104,7 +99,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         player!.blendAnimations()
         camera!.position.y += hasGameEnded ? 0 : 1.5
 
-        if (isPlayerBelowCamera())
+        if (player!.isBelowCamera())
         {
             gameOver()
         }
@@ -120,39 +115,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     {
         let generatedEnviromentObject = environmentFactory!.generateEnvironment()
         self.addChild(generatedEnviromentObject)
-        environmentObjects.append(generatedEnviromentObject)
+        dumpableNodes.append(generatedEnviromentObject)
         
         // Remove enviromentObject
-        if(environmentObjects.count > 20){
-            environmentObjects.first?.removeFromParent()
-            environmentObjects.remove(at: 0)
+        if(dumpableNodes.count > MAX_DUMPABLE_NODES)
+        {
+            dumpableNodes.first?.removeFromParent()
+            dumpableNodes.remove(at: 0)
         }
-        
     }
     
     @objc func updateHazards()
     {
-       let generatedHazard = hazardFactory!.generateHazard()
-       self.addChild(generatedHazard)
-        
-        // Remove hazards
-        if(hazards.count > 20){
-            hazards.first?.removeFromParent()
-            hazards.remove(at: 0)
-        }
-    }
-    
-    func reset()
-    {
-        hasGameEnded = false
-        self.removeAllChildren()
-        hazards.removeAll()
-        environmentObjects.removeAll()
-    }
-    
-    func isPlayerBelowCamera() -> Bool
-    {
-        return player!.position.y < camera!.frame.minY + self.frame.minY
+        let generatedHazard = hazardFactory!.generateHazard()
+        self.addChild(generatedHazard)
+        dumpableNodes.append(generatedHazard)
     }
     
     func gameOver()
