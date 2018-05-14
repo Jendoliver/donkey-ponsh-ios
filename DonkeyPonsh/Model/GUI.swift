@@ -28,6 +28,7 @@ class GUI: SKNode
     private let rightArrow = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "arrow")))
     private let upArrow = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "arrow")))
     private var score = SKLabelNode()
+    private var highScore = SKLabelNode()
     
     override init()
     {
@@ -37,6 +38,7 @@ class GUI: SKNode
         self.zPosition = 1
         
         self.addChild(score)
+        self.addChild(highScore)
         self.addChild(leftArrow)
         self.addChild(upArrow)
         self.addChild(rightArrow)
@@ -93,6 +95,16 @@ class GUI: SKNode
         score.position = CGPoint(x: self.frame.midX, y: scene!.frame.maxY - score.fontSize)
         score.zPosition = 2
         score.alpha = 0.5
+    }
+    
+    public func setupHighScoreLabel(highScore: Int)
+    {
+        self.highScore.fontName = "Arial"
+        self.highScore.fontSize = 40
+        self.highScore.text = "HiScore : \(highScore)"
+        self.highScore.position = CGPoint(x: self.frame.midX, y: scene!.frame.maxY - score.fontSize * 1.75)
+        self.highScore.zPosition = 2
+        self.highScore.alpha = 0.5
     }
     
     public func updateScore(score: Int)

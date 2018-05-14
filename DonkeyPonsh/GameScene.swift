@@ -37,6 +37,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         self.physicsWorld.contactDelegate = self
         
         startGame()
+        
+        
     }
     
     @objc func startGame()
@@ -45,8 +47,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         hasGameEnded = false
         self.removeAllChildren()
         dumpableNodes.removeAll()
-        //hazards.removeAll()
-        //environmentObjects.removeAll()
         
         // Class initialization
         player = Player(pos: CGPoint(x: self.frame.midX, y: self.frame.midY))
@@ -91,7 +91,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         self.addChild(camera)
         self.addChild(floor)
         self.addChild(bgMusic)
+
         gui.show()
+        let highScore = UserDefaults.standard.value(forKey: "score") as? Int
+        gui.setupHighScoreLabel(highScore: highScore == nil ? 0 : highScore!)
     }
     
     override func update(_ currentTime: TimeInterval)
@@ -136,6 +139,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     {
         if(!hasGameEnded)
         {
+            let highScore = UserDefaults.standard.value(forKey: "score") as? Int
+            if ( highScore == nil || player!.score > highScore! )
+            {
+                UserDefaults.standard.setValue(player!.score, forKey: "score")
+            }
+            
             backgroundMusic!.run(SKAction.changeVolume(to: 0.0, duration: 0))
             hasGameEnded = true
             scoreTimer.invalidate()
