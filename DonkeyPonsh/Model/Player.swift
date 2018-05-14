@@ -12,10 +12,10 @@ import SpriteKit
 class Player: SKSpriteNode
 {
     // Player movement constants
-    private var jumpForce = CGFloat(25000)
+    private var jumpImpulse = CGFloat(500)
     private var horizontalSpeed = CGFloat(300)
     
-    private let deathLaunchForce = CGFloat(30000)
+    private let deathLaunchImpulse = CGFloat(30000)
     
     // Player sprites
     private let idleSprite = SKTexture(image: #imageLiteral(resourceName: "idle"))
@@ -96,7 +96,7 @@ class Player: SKSpriteNode
         self.physicsBody!.affectedByGravity = true
         self.physicsBody!.collisionBitMask = CollisionChannel.ghost.rawValue
         self.physicsBody!.contactTestBitMask = CollisionChannel.ghost.rawValue
-        physicsBody?.applyForce(CGVector(dx: 0, dy: deathLaunchForce))
+        physicsBody?.applyForce(CGVector(dx: 0, dy: deathLaunchImpulse))
     }
     
     public func blendAnimations()
@@ -148,7 +148,7 @@ class Player: SKSpriteNode
             {
                 print("Player#processGuiAction: Action up")
                 self.run(jumpSound)
-                physicsBody?.applyForce(CGVector(dx: 0, dy: jumpForce))
+                physicsBody?.applyImpulse(CGVector(dx: 0, dy: jumpImpulse))
                 isInAir = true
             }
             break
